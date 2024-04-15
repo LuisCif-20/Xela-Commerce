@@ -1,0 +1,10 @@
+<div class="grid">
+  @if (publications.length !== 0) {
+    @for (publication of publications; track $index) {
+      <shared-publication-card class="md:col-4 sm:col-12" [publication]="publication">
+        <button mat-flat-button color="accent" class="mr-2 my-auto" (click)="onApproved(publication.id)">Aprobar</button>
+        <button mat-flat-button color="warn" class="my-auto">Rechazar</button>
+      </shared-publication-card>
+    }
+  }
+</div>

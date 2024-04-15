@@ -1,0 +1,11 @@
+<mat-card class="mb-3">
+  <mat-card-content class="mx-auto my-3">
+    <span class="text-3xl font-bold capitalize">
+      {{ coin.name }}: {{ coin.value }}
+    </span>
+  </mat-card-content>
+  <mat-divider/>
+  <mat-card-footer class="mx-4">
+    <p class="text-justify font-italic">{{ returnDesc(coin.name) }}</p>
+  </mat-card-footer>
+</mat-card>

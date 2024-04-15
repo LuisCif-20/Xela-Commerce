@@ -1,0 +1,11 @@
+<div class="grid">
+  <div class="col-3">
+    @for (coin of coins; track $index) {
+      <common-coin-card [coin]="coin" />
+    }
+  </div>
+  <div class="col-9 grid">
+    <common-add-quetzals class="col-4" />
+    <common-exchange-currencies class="col-8" />
+  </div>
+</div>

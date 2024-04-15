@@ -1,0 +1,6 @@
+<span class="flex align-items-center">
+  @if (data?.icon) {
+    <mat-icon [color]="data?.color" class="mr-3">{{ data?.icon }}</mat-icon>
+  }
+  {{ data?.message }}
+</span>

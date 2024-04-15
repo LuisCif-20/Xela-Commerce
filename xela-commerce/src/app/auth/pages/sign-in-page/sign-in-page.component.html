@@ -1,0 +1,32 @@
+<mat-card class="shadow-8 m-auto" style="width: 350px;">
+  <mat-card-header class="mx-auto my-6">
+    <mat-card-title class="text-2xl font-bold">
+      Inicia Sesión
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="mt-2 mb-5">
+    <form class="formgrid grid" [formGroup]="signInForm" (ngSubmit)="onSignIn()">
+      <mat-form-field class="col-10 col-offset-1" appearance="outline">
+        <mat-label>Nombre de Usuario</mat-label>
+        <input matInput type="text" placeholder="nick@name" formControlName="user_name">
+      </mat-form-field>
+      <mat-form-field class="col-10 col-offset-1" appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" placeholder="••••••••" formControlName="password">
+      </mat-form-field>
+      <div class="col-10 col-offset-1">
+        <button mat-raised-button color="primary" type="submit" class="col-12">
+          Ingresar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-divider class="mt-4"/>
+  <mat-card-actions>
+    <span class="spacer"></span>
+    <span>¿No tienes cuenta?</span>
+    <a routerLink="/auth/sign-up" mat-button color="accent" class="mr-1 ml-2">
+      Registrate        
+    </a>
+  </mat-card-actions>
+</mat-card>

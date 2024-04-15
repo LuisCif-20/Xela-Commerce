@@ -1,0 +1,53 @@
+<mat-card style="width: 900px;">
+  <mat-card-header class="mx-auto my-3">
+    <mat-card-title class="text-2xl font-bold">
+      {{ title }} tu Publicación
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="formgrid grid" [formGroup]="pubForm">
+      <div class="col-6" style="padding: 25px;">
+        <div class="square">
+          <div mat-ripple class="ripple-container shadow-8">
+            <label for="pic" class="flex justify-content-center align-items-center w-full h-full" matTooltip="Subir Imagen">
+              @if (!picture) {
+                <mat-icon color="primary" class="icon-display">add_a_photo</mat-icon>
+              } @else {
+                <img [src]="picture" alt="Profile picture" class="picture p-2">
+              }
+            </label>
+            <input type="file" id="pic" style="display: none;" (change)="catchFile($event)" formControlName="image">
+          </div>
+        </div>
+      </div>
+      <div class="col-6" style="padding: 25px;">
+        <div class="formgrid grid">
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Titulo</mat-label>
+            <input matInput type="text" formControlName="title">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" cdkTextareaAutosize="false" maxlength="255" style="height: 70px;"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="category_id">
+              @for (category of categories; track $index) {
+                <mat-option [value]="category.value">
+                  <mat-icon>{{ category.icon }}</mat-icon>
+                    {{ category.title }}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Precio</mat-label>
+            <input matInput type="number" min="0" formControlName="price">
+          </mat-form-field>
+          <ng-content/>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

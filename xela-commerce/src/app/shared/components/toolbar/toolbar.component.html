@@ -1,0 +1,53 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav mode="push" style="width: 300px;">
+    <mat-toolbar color="accent">
+      <span class="text-2xl">Menu</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Cerrar">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list>
+      @for (option of options; track $index) {
+        <mat-list-item [routerLink]="option.route" (click)="sidenav.toggle()">
+          <mat-icon matListItemIcon>{{ option.icon }}</mat-icon>
+          {{ option.label }}
+        </mat-list-item>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-toolbar [color]="color">
+    <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
+      <mat-icon>menu</mat-icon>
+      <span class="spacer"></span>
+    </button>
+    <span class="text-2xl font-bold ml-6">Xela-Commerce</span>
+    <span class="spacer"></span>
+    <div class="mr-4">
+      @if (status === 'authenticated') {
+        <button mat-icon-button matTooltip="Mi Cuenta" class="mx-1" routerLink="./config-account">
+          <mat-icon>
+            manage_accounts
+          </mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Cerrar Sesión" class="mx-1" (click)="onLogOut()">
+          <mat-icon>
+            logout
+          </mat-icon>
+        </button>
+      } @else if (status === 'notAuthenticated') {
+        <button mat-icon-button matTooltip="Registrate" class="mx-1" routerLink="/auth/sign-up">
+          <mat-icon>
+            assignment_ind
+          </mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Iniciar Sesión" class="mx-1" routerLink="/auth">
+          <mat-icon>
+            login
+          </mat-icon>
+        </button>
+      }
+    </div>
+  </mat-toolbar>
+  <ng-content select=".pages"></ng-content>
+</mat-sidenav-container>

@@ -1,0 +1,37 @@
+<mat-card>
+  <mat-card-header class="mx-auto my-3">
+    <mat-card-title class="text-3xl font-bold">
+      Ingresa Quetzales
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="mt-5 mb-4">
+    <form class="formgrid grid" [formGroup]="formAdd">
+      <mat-form-field class="col-10 col-offset-1" appearance="outline">
+        <mat-label>Numero de Targeta</mat-label>
+        <input #card matInput type="text" maxlength="19" (keyup)="keyUpEvent(card)" placeholder="#### #### #### ####" formControlName="card_numer">
+      </mat-form-field>
+      <mat-form-field class="col-10 col-offset-1" appearance="outline">
+        <mat-label>Nombre del Titular</mat-label>
+        <input matInput type="text" placeholder="Nick Name" formControlName="titular">
+      </mat-form-field>
+      <mat-form-field class="col-5 col-offset-1" appearance="outline">
+        <mat-label>Expira</mat-label>
+        <input matInput type="text" placeholder="01/12" maxlength="5" formControlName="expires">
+      </mat-form-field>
+      <mat-form-field class="col-5" appearance="outline">
+        <mat-label>CVV</mat-label>
+        <input matInput type="text" placeholder="123" maxlength="3" formControlName="cvv">
+      </mat-form-field>
+      <mat-form-field class="col-10 col-offset-1" appearance="outline">
+        <mat-label>Cantidad a Retirar</mat-label>
+        <input matInput type="number" placeholder="###.##" min="0" formControlName="quetzals">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-divider/>
+  <mat-card-actions class="my-2 flex justify-content-center">
+    <button mat-raised-button color="primary" (click)="onAddQuetzals()">
+      Agregar Quetzales
+    </button>
+  </mat-card-actions>
+</mat-card>

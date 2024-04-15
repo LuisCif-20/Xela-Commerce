@@ -1,0 +1,28 @@
+<mat-card class="shadow-5">
+  <mat-icon class="absolute state" [color]="iconColor">{{ iconState }}</mat-icon>
+  <mat-card-header>
+    <img mat-card-avatar [src]="avatar" alt="Foto de Perfil del Usuario">
+    <mat-card-title class="mb-2">
+      {{ publication.title }}
+    </mat-card-title>
+    <mat-card-subtitle class="mb-2">
+      {{ publication.user.user_name }} - {{ postDate }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="img" class="picture mt-3" alt="Imagen de la Publicacion" style="height: 250px;">
+  <mat-card-content class="my-3">
+    <p class="text-justify mx-2">
+      {{ publication.description }}
+    </p>
+  </mat-card-content>
+  <mat-divider/>
+  <mat-card-actions class="mx-3">
+    @if (publication.price) {
+      <span>
+        Precio C: {{ publication.price }}
+      </span>
+    }
+    <span class="spacer"></span>
+    <ng-content/>
+  </mat-card-actions>
+</mat-card>

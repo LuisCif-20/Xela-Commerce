@@ -1,0 +1,62 @@
+<mat-card class="shadow-8 m-auto" style="width: 375px;">
+  <mat-card-header class="mx-auto mt-6 mb-4">
+    <mat-card-title class="text-2xl font-bold">
+      Registrate
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="mb-3">
+    <mat-stepper labelPosition="bottom" linear="true">
+      <mat-step label="Datos Personales" [stepControl]="firstForm">
+        <form class="formgrid grid mt-2" [formGroup]="firstForm">
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>Nombre Completo</mat-label>
+            <input matInput type="text" placeholder="nick name" formControlName="full_name">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="birthdate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="col-12 flex justify-content-center">
+            <button mat-fab color="primary" matStepperNext class="mt-2" matTooltip="Siguiente">
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step label="Datos de Cuenta" [stepControl]="secondForm">
+        <form class="formgrid grid mt-2" [formGroup]="secondForm">
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>Nombre de Usuario</mat-label>
+            <input matInput type="text" placeholder="nick@name" formControlName="user_name">
+          </mat-form-field>
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" placeholder="••••••••" formControlName="password">
+          </mat-form-field>
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input matInput type="password" placeholder="••••••••" formControlName="c_password">
+          </mat-form-field>
+          <div class="col-12 flex justify-content-center">
+            <button mat-fab color="primary" matStepperPrevious class="mt-2 mx-2" matTooltip="Regresar">
+              <mat-icon>navigate_before</mat-icon>
+            </button>
+            <button mat-fab color="accent" matStepperNext class="mt-2 mx-2" matTooltip="Enviar" (click)="onSignUp()">
+              <mat-icon>check</mat-icon>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </mat-card-content>
+  <mat-divider class="mt-2"/>
+  <mat-card-actions>
+    <span class="spacer"></span>
+    <span>¿Ya tienes cuenta?</span>
+    <a routerLink="/auth" mat-button color="accent" class="mr-1 ml-2">
+      Inicia Sesión        
+    </a>
+  </mat-card-actions>
+</mat-card>

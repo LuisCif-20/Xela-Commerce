@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header class="mt-5 mb-4 mx-auto">
+    <mat-card-title class="text-2xl font-bold">
+      Cambia tu Foto de Perfil
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="my-4 mx-2 flex justify-content-center">
+    <div matRipple class="ripple shadow-8 flex p-2">
+      <label for="pfp" matTooltip="Subir Foto" class="w-full h-full flex justify-content-center align-items-center">
+        <img [src]="currentPfp" alt="Foto Actual" class="picture">
+      </label>
+      <input type="file" id="pfp" hidden="true" (change)="onCatchFile($event)">
+    </div>
+  </mat-card-content>
+  <mat-divider class="mt-4"/>
+  <mat-card-actions class="flex justify-content-center my-2">
+    <button mat-raised-button color="primary" (click)="onSetPfp()">
+      Cambiar Foto
+    </button>
+  </mat-card-actions>
+</mat-card>

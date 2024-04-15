@@ -1,0 +1,14 @@
+<div class="flex">
+  <common-publication-form title="Crea" class="mx-auto" [publication]="publication" [category]="true" (validForm)="monitorForm($event)">
+    <div class="flex w-full mt-4">
+      <div class="mx-auto">
+        <button mat-fab color="primary" matTooltip="Editar" class="mx-2" [disabled]="!isValid" (click)="onEditPublication()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-fab color="warn" matTooltip="Cancelar" class="mx-2" (click)="onCancel()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </common-publication-form>
+</div>
