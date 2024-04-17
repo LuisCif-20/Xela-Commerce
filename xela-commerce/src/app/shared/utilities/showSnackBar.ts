@@ -11,7 +11,7 @@ const showSnackBar = (snackBar: MatSnackBar, message: string, color:Colors = Col
         icon = 'cancel';
     }
     snackBar.openFromComponent(SnackBarComponent, {
-        duration: 3000,
+        duration: 1500,
         data: {
             message,
             color,

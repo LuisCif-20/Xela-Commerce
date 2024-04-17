@@ -5,6 +5,8 @@ import { PublicationService } from '../../../shared/services/publication.service
 import { Publication } from '../../../shared/interfaces/publication.interface';
 import { showError, showSuccess } from '../../../shared/utilities/showSnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PubForm } from '../../interfaces/pub-form.interface';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-edit-publication-page',
@@ -13,33 +15,45 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditPublicationPageComponent implements OnInit {
 
+  private readonly imgUrl = `${environment.IMAGES_URL}/publications`
+
   private router = inject(Router);
-  private pubsService = inject(PublicationService);
   private snackBar = inject(MatSnackBar);
   private actRoute = inject(ActivatedRoute);
-  public publication?: Publication;
+  private pubsService = inject(PublicationService);
+
   private formData: FormData | null = null;
-  public isValid: boolean = false;
+  private pubId?: number;
+
+  public disabled: boolean = true;
+  public values?: PubForm;
+
 
   ngOnInit(): void {
     this.actRoute.data.subscribe(({ publication }) => {
-      this.publication = publication;
+      this.values = {
+        title: publication.title,
+        price:  publication.price || '',
+        picture: `${this.imgUrl}/${publication.image}`,
+        category_id: publication.category.id,
+        description: publication.description,
+      };
+      this.pubId = publication.id;
     });
   }
 
-  monitorForm(formData: FormData | null) {
-    if (formData) {
-      this.formData = formData;
-      this.isValid = true;
+  receiveData(formData: FormData | null) {
+    this.formData = formData;
+    if (this.formData) {
+      this.disabled = false;
     } else {
-      this.formData = null;
-      this.isValid = false;
+      this.disabled = true;
     }
   }
 
   onEditPublication() {
-    if (this.isValid && this.formData) {
-      this.pubsService.editPublicatino(this.publication!.id, this.formData).subscribe({
+    if (!this.disabled && this.formData) {
+      this.pubsService.editPublication(this.pubId!, this.formData).subscribe({
         next: () => {
           this.router.navigateByUrl('/common/my-publications')
           showSuccess(this.snackBar, 'Publicacion editada correctamente.');

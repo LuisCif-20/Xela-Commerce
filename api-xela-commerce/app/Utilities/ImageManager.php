@@ -15,9 +15,13 @@ class ImageManager
     }
 
     public static function updateImage(UploadedFile $image, string $disk, string $current_image) {    
-        if (Storage::disk($disk)->exists($current_image) && $current_image !== 'default.png') {
-            Storage::disk($disk)->delete($current_image);
-        }
+        self::deleteImage($disk, $current_image);
         return self::saveImage($image, $disk);
+    }
+
+    public static function deleteImage(string $disk, string $image) {
+        if (Storage::disk($disk)->exists($image) && $image !== 'default.png') {
+            Storage::disk($disk)->delete($image);
+        }
     }
 }

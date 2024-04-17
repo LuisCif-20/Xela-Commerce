@@ -8,6 +8,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './auth/interceptors/auth.interceptor';
+import { AuthService } from './auth/services/auth.service';
+import { PublicationService } from './shared/services/publication.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { authInterceptor } from './auth/interceptors/auth.interceptor';
     provideHttpClient(
       withInterceptors([authInterceptor])
     ),
-    provideNativeDateAdapter()
+    provideNativeDateAdapter(),
+    AuthService,
+    PublicationService
   ],
   bootstrap: [AppComponent]
 })

@@ -14,7 +14,9 @@ export class PublicationService {
   private httpClient =  inject(HttpClient);
   private _publications: BehaviorSubject<Publication[]> = new BehaviorSubject<Publication[]>([]);
 
-  constructor() { }
+  constructor() {
+    this.getPublications().subscribe();
+  }
 
   private makeHeader(): HttpHeaders {
     return new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
@@ -41,13 +43,13 @@ export class PublicationService {
     return this.processRequest(this.httpClient.patch<PublicationsResponse>(url, {state}, {headers}));
   }
 
-  public addPublicatino(formData: FormData): Observable<boolean> {
+  public addPublication(formData: FormData): Observable<boolean> {
     const url: string = `${this.baseUrl}/create`;
     const headers: HttpHeaders = this.makeHeader();
     return this.processRequest(this.httpClient.post<PublicationsResponse>(url, formData, {headers}));
   }
 
-  public editPublicatino(pub_id: number, formData: FormData): Observable<boolean> {
+  public editPublication(pub_id: number, formData: FormData): Observable<boolean> {
     const url: string = `${this.baseUrl}/update/${pub_id}`;
     const headers: HttpHeaders = this.makeHeader();
     return this.processRequest(this.httpClient.post<PublicationsResponse>(url, formData, {headers}));
@@ -60,6 +62,12 @@ export class PublicationService {
       map(({ publication }) => publication),
       catchError((error: HttpErrorResponse) => throwError(() => error))
     );
+  }
+
+  public deletePublication(id: number): Observable<boolean> {
+    const url: string = `${this.baseUrl}/delete/${id}`;
+    const headers: HttpHeaders = this.makeHeader();
+    return this.processRequest(this.httpClient.delete<PublicationsResponse>(url, {headers}));
   }
 
   public publications(): Observable<Publication[]|[]> {

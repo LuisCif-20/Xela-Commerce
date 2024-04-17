@@ -42,6 +42,12 @@ class UserController extends Controller
         ], true);
     }
 
+    public function storeAdmin(UserRequest $request) {
+        $user_data = $request->validated();
+        User::create($user_data);
+        return $this->respondSuccessfully();
+    }
+
     public function show() {
         $user = auth()->user();
         return $this->respondSuccessfully([
@@ -73,7 +79,7 @@ class UserController extends Controller
     public function setPfp(UserRequest $request, User $user) {
         if ($request->hasFile('profile_picture')) {  
             $newImage = $request->file('profile_picture');
-            $image = ImageManager::updateImage($newImage, 'profile_pictures', $user->profile_picture);
+            $image = ImageManager::updateImage($newImage, 'profile-pictures', $user->profile_picture);
             $user->update(['profile_picture' => $image]);
         }
         return $this->respondSuccessfully([

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('full_name', 50);
             $table->date('birthdate');
-            $table->string('profile_picture', 20)->default('default.png');
+            $table->string('profile_picture', 50)->default('default.png');
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

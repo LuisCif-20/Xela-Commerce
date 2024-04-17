@@ -1,1 +1,43 @@
-<p>add-admin-page works!</p>
+<mat-card class="mx-auto shadow-5" style="width: 600px;">
+  <mat-card-header class="mx-auto my-5">
+    <mat-card-title class="text-3xl fond-bold">
+      Registra un Administrador
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="my-5">
+    <form class="formgrid grid" [formGroup]="adminForm">
+      <div class="col-10 col-offset-1 grid">
+        <mat-form-field appearance="outline" class="col-5">
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput type="text" placeholder="Nick Name" formControlName="full_name">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-7">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="birthdate">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6 col-offset-3">
+          <mat-label>Nombre de Usuario</mat-label>
+          <input matInput type="text" placeholder="nick@name" formControlName="user_name">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" placeholder="••••••••" formControlName="password">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Confirma su Contraseña</mat-label>
+          <input matInput type="password" placeholder="••••••••" formControlName="c_password">
+        </mat-form-field>
+      </div>
+    </form>
+    <div class="w-full flex justify-content-center mt-2">
+      <button mat-fab color="accent" class="mt-2 mx-2" matTooltip="Registrar" [disabled]="!adminForm.valid" (click)="onRegister()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-fab color="warn" class="mt-2 mx-2" matTooltip="Cancelar" (click)="onCancel()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

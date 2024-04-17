@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rx
 import { AuthStatus } from '../interfaces/auth-status.enum';
 import { showError, showSuccess } from '../../shared/utilities/showSnackBar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BaseResponse } from '../../shared/interfaces/base-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,15 @@ export class AuthService {
   public signUp(userData: FormData): Observable<boolean> {
     const url = `${this.baseUrl}/sign-up`;
     return this.processRequest(this.httpClient.post<AuthResponse>(url, userData));
+  }
+
+  public regAdmin(userData: FormData): Observable<boolean> {
+    const url = `${this.baseUrl}/reg-admin`;
+    const headers: HttpHeaders = this.makeHeader(localStorage.getItem('token')!);
+    return this.httpClient.post<BaseResponse>(url, userData, {headers}).pipe(
+      map(() => true),
+      catchError((error: HttpErrorResponse) => throwError(() => error))
+    );
   }
 
   public setInfo(info: FormData): Observable<boolean> {

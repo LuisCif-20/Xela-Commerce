@@ -43,7 +43,7 @@ class UserRequest extends FormRequest
                 return Arr::only($rules, ['user_name', 'password']);
             case 'setPwd':
                 return Arr::only($rules, ['password', 'old_password']);
-            case 'store':
+            case 'store' || 'storeAdmin':
                 $rules['user_name'] .= '|unique:users,user_name';
                 return Arr::except($rules, ['old_password', 'profile_picture']);
             default: // $route === 'update'

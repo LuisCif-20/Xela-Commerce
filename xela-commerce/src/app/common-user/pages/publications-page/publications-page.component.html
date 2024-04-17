@@ -1,10 +1,18 @@
-<div class="grid">
-  @if (publications.length !== 0) {
-    @for (publication of publications; track $index) {
-      <shared-publication-card class="md:col-4 sm:col-12" [publication]="publication">
-        <button mat-flat-button color="primary" class="mr-2 my-auto">Chatear</button>
-        <button mat-flat-button color="warn" class="my-auto">Reportar</button>
-      </shared-publication-card>
-    }
+<mat-tab-group class="shadow-5" color="accent">
+  @for (group of groups; track $index) {
+    <mat-tab [label]="group" class="grid nested-grid">
+      @if (publications.length !== 0) {
+        <div class="col py-5 px-3" style="height: 472px;">
+          <div class="grid max-h-full overflow-auto">
+            @for (publication of classifyPubs(group); track $index) {
+              <shared-publication-card class="md:col-4 sm:col-12" [publication]="publication">
+                <button mat-flat-button color="primary" class="mr-2 my-auto">Chatear</button>
+                <button mat-flat-button color="warn" class="my-auto">Reportar</button>
+              </shared-publication-card>
+            }
+          </div>
+        </div>
+      }
+    </mat-tab>
   }
-</div>
+</mat-tab-group>

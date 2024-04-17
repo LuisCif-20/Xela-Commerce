@@ -8,6 +8,7 @@ import { ReportedPublicationsPageComponent } from './pages/reported-publications
 import { AddAdminPageComponent } from './pages/add-admin-page/add-admin-page.component';
 import { ReviewPublicationsPageComponent } from './pages/review-publications-page/review-publications-page.component';
 import { MaterialModule } from '../material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     AdminRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

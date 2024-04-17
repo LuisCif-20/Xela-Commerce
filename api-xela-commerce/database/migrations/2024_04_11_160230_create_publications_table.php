@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedInteger('code')->unique();
             $table->string('title', 30);
             $table->string('description', 255);
-            $table->string('image');
-            $table->decimal('price')->nullable(true);
+            $table->string('image', 50);
+            $table->integer('price')->nullable(true);
             $table->enum('state', ['approved', 'pending', 'reported'])->default('pending');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');

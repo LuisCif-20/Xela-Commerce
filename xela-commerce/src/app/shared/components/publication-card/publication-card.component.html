@@ -1,15 +1,15 @@
 <mat-card class="shadow-5">
-  <mat-icon class="absolute state" [color]="iconColor">{{ iconState }}</mat-icon>
+  <mat-icon class="absolute state" [color]="returnIC(publication.state)">{{ returnIS(publication.state) }}</mat-icon>
   <mat-card-header>
-    <img mat-card-avatar [src]="avatar" alt="Foto de Perfil del Usuario">
+    <img mat-card-avatar [src]="returnAvatar(publication.user.profile_picture)" alt="Foto de Perfil del Usuario">
     <mat-card-title class="mb-2">
       {{ publication.title }}
     </mat-card-title>
     <mat-card-subtitle class="mb-2">
-      {{ publication.user.user_name }} - {{ postDate }}
+      {{ publication.user.user_name }} - {{ returnPD(publication.updated_at) }}
     </mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image [src]="img" class="picture mt-3" alt="Imagen de la Publicacion" style="height: 250px;">
+  <img mat-card-image [src]="returnImg(publication.image)" class="picture mt-3" alt="Imagen de la Publicacion" style="height: 240px;">
   <mat-card-content class="my-3">
     <p class="text-justify mx-2">
       {{ publication.description }}

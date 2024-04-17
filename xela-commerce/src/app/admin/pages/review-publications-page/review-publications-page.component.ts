@@ -18,6 +18,11 @@ export class ReviewPublicationsPageComponent implements OnInit, OnDestroy {
   private pubsSubs?: Subscription;
 
   public publications: Publication[] = [];
+  public groups: string[] = [
+    'Venta',
+    'Compra',
+    'Voluntariado'
+  ];
 
   ngOnInit(): void {
     this.pubsSubs = this.pubsService.publications().subscribe((pubs: Publication[]) => {
@@ -37,5 +42,17 @@ export class ReviewPublicationsPageComponent implements OnInit, OnDestroy {
       error: (err) => showError(this.snackBar, err)
     })
   }
+
+  reject(pub_id: number) {
+    this.pubsService.deletePublication(pub_id).subscribe({
+      next: () => showSuccess(this.snackBar, 'Publicacion rechazada y eliminada.'),
+      error: (err) => showError(this.snackBar, err)
+    });
+  }
+
+  classifyPubs(category: string): Publication[] {
+    return this.publications.filter(pub => pub.category.name === category);
+  }
+
   
 }

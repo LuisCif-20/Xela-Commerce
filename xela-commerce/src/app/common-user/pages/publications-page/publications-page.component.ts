@@ -8,7 +8,11 @@ import { User } from '../../../auth/interfaces/auth.interface';
 @Component({
   selector: 'common-publications-page',
   templateUrl: './publications-page.component.html',
-  styles: ``
+  styles: `
+    .group-content {
+      overflow-y: auto;
+    }
+  `
 })
 export class PublicationsPageComponent implements OnInit, OnDestroy {
 
@@ -19,6 +23,11 @@ export class PublicationsPageComponent implements OnInit, OnDestroy {
   private user_id?: number;
 
   public publications: Publication[] = [];
+  public groups: string[] = [
+    'Venta',
+    'Compra',
+    'Voluntariado'
+  ];
 
   ngOnInit(): void {
     this.userSubs = this.authService.currentUser().subscribe((user: User|null) => {
@@ -27,11 +36,9 @@ export class PublicationsPageComponent implements OnInit, OnDestroy {
       }
     });
     this.pubsSubs = this.pubsService.publications().subscribe((pubs: Publication[]) => {
-      if (pubs.length !== 0) {
-        this.publications = pubs.filter(pub => pub.state === 'approved');
-        if (this.user_id) {
-          this.publications = this.publications.filter(pub => pub.user.id !== this.user_id)
-        }
+      this.publications = pubs.filter(pub => pub.state === 'approved');
+      if (this.user_id) {
+        this.publications = this.publications.filter(pub => pub.user.id !== this.user_id)
       }
     });
   }
@@ -39,6 +46,10 @@ export class PublicationsPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.userSubs?.unsubscribe();
     this.pubsSubs?.unsubscribe();
+  }
+
+  classifyPubs(category: string): Publication[] {
+    return this.publications.filter(pub => pub.category.name === category);
   }
 
 }

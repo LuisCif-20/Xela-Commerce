@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Coin } from '../../interfaces/currency.interface';
 
 @Component({
@@ -6,17 +6,26 @@ import { Coin } from '../../interfaces/currency.interface';
   templateUrl: './coin-card.component.html',
   styles: ``
 })
-export class CoinCardComponent {
+export class CoinCardComponent implements OnInit {
 
   @Input({ required: true }) public coin!: Coin;
+  public currencyIcon?: string;
+  public subTitle?: string;
 
-  public returnDesc(coinName: string) {
+  ngOnInit(): void {
+      if (this.coin) {
+        this.currencyIcon = `../../../../assets/${this.coin.name}.png`
+        this.subTitle = this.returnSubTitle(this.coin.name);
+      }
+  }
+
+  public returnSubTitle(coinName: string) {
     if (coinName === 'ceibas') {
-      return 'La Ceiba es el pilar de este sistema, con ella podras realizar todo tipo de transacciones.';
+      return 'Moneda del Sistema';
     } else if (coinName === 'quetzales') {
-      return 'El Quetzal es la moneda local, podras utilizarla para comprar "Ceibas".';
+      return 'Moneda Local';
     } else {
-      return 'Gasta esta cantidad de "Ceibas" antes de cambiarlas por Quetzales.';
+      return 'Restriccion al Retirar';
     }
   }
 

@@ -22,35 +22,41 @@ export class PublicationCardComponent implements OnInit {
   
   @Input({ required: true }) public publication!: Publication;
 
-  private readonly imgUrl: string = `${environment.IMAGES_URL}`;
-
-  public postDate?: string;
-  public avatar?: string; 
-  public img?: string;
-  public iconColor?: string;
-  public iconState?: string;
+  private readonly imgUrl: string = environment.IMAGES_URL;
 
   ngOnInit(): void {
-    this.postDate = new Date(this.publication.updated_at!).toISOString().split('T')[0];
-    this.avatar = `${this.imgUrl}/profile-pictures/${this.publication.user.profile_picture}`;
-    this.img = `${this.imgUrl}/publications/${this.publication.image}`;
-    this.returnIconState(this.publication.state);
+
   }
 
-  private returnIconState(state: string) {
-    switch (state) {
-      case 'pending':
-        this.iconColor = 'primary';
-        this.iconState = 'pending';
-        break;
-      case 'approved':
-        this.iconColor = 'accent';
-        this.iconState = 'check_circle';
-        break;
-      default:
-        this.iconColor = 'warn';
-        this.iconState = 'report';
-        break;
+  returnPD(date: string) {
+    return new Date(date).toISOString().split('T')[0];
+  }
+
+  returnAvatar(avatar: string) {
+    return `${this.imgUrl}/profile-pictures/${avatar}`;
+  }
+
+  returnImg(image: string) {
+    return `${this.imgUrl}/publications/${image}`;
+  }
+
+  returnIC(state: string) {
+    if (state === 'pending') {
+      return 'primary';
+    } else if (state === 'approved') {
+      return 'accent';
+    } else {
+      return 'warn';
+    }
+  }
+
+  returnIS(state: string) {
+    if (state === 'pending') {
+      return 'pending';
+    } else if (state === 'approved') {
+      return 'check_circle';
+    } else {
+      return 'report';
     }
   }
 

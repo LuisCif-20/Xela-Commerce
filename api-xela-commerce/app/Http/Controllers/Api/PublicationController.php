@@ -57,11 +57,10 @@ class PublicationController extends Controller
      */
     public function update(PublicationRequest $request, Publication $pub)
     {
-        $data = $request->validated();
-        error_log($request->__toString());
+        $data = Arr::except($request->validated(), ['image']);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $data['image'] = ImageManager::updateImage($image, 'publications', $pub->publication_image);
+            $data['image'] = ImageManager::updateImage($image, 'publications', $pub->image);
         }
         $pub->update($data);
         $publications = Publication::all();
@@ -84,6 +83,7 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $pub)
     {
+        ImageManager::deleteImage('publications', $pub->image);
         $pub->delete();
         $publications = Publication::all();
         return $this->respondSuccessfully([

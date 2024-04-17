@@ -1,8 +1,8 @@
 <div class="flex">
-  <common-publication-form title="Crea" class="mx-auto" [publication]="publication" [category]="true" (validForm)="monitorForm($event)">
+  <common-publication-form title="Crea" class="mx-auto" [currentValues]="values" (values)="receiveData($event)">
     <div class="flex w-full mt-4">
       <div class="mx-auto">
-        <button mat-fab color="primary" matTooltip="Editar" class="mx-2" [disabled]="!isValid" (click)="onEditPublication()">
+        <button mat-fab color="primary" matTooltip="Editar" class="mx-2" [disabled]="disabled" (click)="onEditPublication()">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-fab color="warn" matTooltip="Cancelar" class="mx-2" (click)="onCancel()">

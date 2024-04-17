@@ -11,6 +11,7 @@ Route::middleware('jwt.auth')->prefix('user')
         Route::post('/sign-up', 'store')->withoutMiddleware('jwt.auth');
         Route::post('/sign-in', 'index')->withoutMiddleware('jwt.auth');
         Route::post('/log-out', 'logout');
+        Route::post('/reg-admin', 'storeAdmin');
         Route::post('/refresh', 'refreshToken')->withoutMiddleware('jwt.auth')->middleware('jwt.refresh');
         Route::post('/set-pfp/{user}', 'setPfp');
         Route::patch('/update/{user}', 'update');
@@ -31,5 +32,5 @@ Route::middleware('jwt.auth')->prefix('publication')
         Route::post('/create', 'store');
         Route::post('/update/{pub}', 'update');
         Route::patch('/set-state/{pub}', 'setState');
-        Route::delete('/delete', 'destroy');
+        Route::delete('/delete/{pub}', 'destroy');
     });

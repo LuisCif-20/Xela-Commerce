@@ -20,7 +20,6 @@ export class CommonUserLayoutComponent implements OnInit, OnDestroy {
   private currencyService = inject(CurrencyService);
   private currSub?: Subscription;
   private authStatus?: Subscription;
-  private pubsSubs?: Subscription;
   private status: AuthStatus = AuthStatus.checking;
   public color: string = 'primary';
   public options: MenuOption[] = [];
@@ -38,13 +37,11 @@ export class CommonUserLayoutComponent implements OnInit, OnDestroy {
       this.status = status;
     });
     if (this.status === AuthStatus.authenticated) {
-      this.currSub = this.currencyService.getCurrency().subscribe();
+      this.currSub = this.currencyService.getCurrencies().subscribe();
     }
-    this.pubsSubs = this.pubsService.getPublications().subscribe();
   }
 
   ngOnDestroy(): void {
-    this.pubsSubs?.unsubscribe();
     this.currSub?.unsubscribe();
     this.authStatus?.unsubscribe();
   }

@@ -55,9 +55,9 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
-        'profile_pictures' => [
+        'profile-pictures' => [
             'driver' => 'local',
-            'root' => storage_path('app/profile_pictures'),
+            'root' => storage_path('app/profile-pictures'),
             'url' => env('APP_URL').'/profile-pictures',
             'visibility' => 'public',
         ],
@@ -82,7 +82,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('profile-pictures') => storage_path('app/profile_pictures'),
+        public_path('profile-pictures') => storage_path('app/profile-pictures'),
         public_path('publications') => storage_path('app/publications'),
     ],
 

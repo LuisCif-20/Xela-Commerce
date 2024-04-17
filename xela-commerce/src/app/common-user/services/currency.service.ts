@@ -30,7 +30,7 @@ export class CurrencyService {
     );
   }
 
-  public getCurrency(): Observable<boolean> {
+  public getCurrencies(): Observable<boolean> {
     const url: string =  `${this.baseUrl}/my-currency`;
     const headers: HttpHeaders = this.makeHeader(localStorage.getItem('token')!);
     return this.processRequest(this.httpClient.get<CurrencyResponse>(url, { headers }));

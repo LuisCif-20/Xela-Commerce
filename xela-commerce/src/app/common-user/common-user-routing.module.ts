@@ -13,7 +13,7 @@ import { authGuard } from '../auth/guards/auth.guard';
 import { checkRoleGuard } from '../auth/guards/check-role.guard';
 import { CurrenciesPageComponent } from './pages/currencies-page/currencies-page.component';
 import { EditPublicationPageComponent } from './pages/edit-publication-page/edit-publication-page.component';
-import { publicationResolver } from './resolvers/publication.resolver';
+import { publicationByIdResolver } from './resolvers/publicationById.resolver';
 
 
 const routes: Routes = [
@@ -46,7 +46,7 @@ const routes: Routes = [
         path: 'edit/:id',
         title: 'Editar Publicación',
         component: EditPublicationPageComponent,
-        resolve: { publication: publicationResolver },
+        resolve: { publication: publicationByIdResolver },
         data: { role: 'Comun' },
         canActivate: [authGuard, checkRoleGuard]
       },
