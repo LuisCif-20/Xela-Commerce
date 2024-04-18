@@ -34,8 +34,8 @@ class TransactionController extends Controller
         $r_curr = Currency::where("user_id", $r_user->id)->first();
         $i_curr = Currency::where("user_id", $i_user->id)->first();
         if (Category::find($data["category_id"])->name === "Voluntariado") {
-            $r_curr->update(["ceibas" => $r_curr->ceibas + 50]);
-            $i_curr->update(["ceibas" => $i_curr->ceibas + 50]);
+            $r_curr->update(["ceibas" => $r_curr->ceibas + 50, "penalization" => $r_curr->penalization + 50]);
+            $i_curr->update(["ceibas" => $i_curr->ceibas + 50, "penalization" => $i_curr->penalization + 50]);
         } else {
             $r_curr->update(["ceibas" => $r_curr->ceibas + $data['amount']]);
             $i_curr->update(["ceibas" => $i_curr->ceibas - $data['amount']]);
