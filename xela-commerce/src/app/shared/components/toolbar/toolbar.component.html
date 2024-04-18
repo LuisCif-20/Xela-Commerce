@@ -16,13 +16,15 @@
       }
     </mat-nav-list>
   </mat-sidenav>
-  <mat-toolbar [color]="color">
+  <mat-toolbar [color]="color" class="tool">
     <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
       <mat-icon>menu</mat-icon>
       <span class="spacer"></span>
     </button>
     <span class="text-2xl font-bold ml-6">Xela-Commerce</span>
-    <span class="spacer"></span>
+    <div class="spacer">
+      <ng-content select=".search"></ng-content>
+    </div>
     <div class="mr-4">
       @if (status === 'authenticated') {
         <button mat-icon-button matTooltip="Mi Cuenta" class="mx-1" routerLink="./config-account">

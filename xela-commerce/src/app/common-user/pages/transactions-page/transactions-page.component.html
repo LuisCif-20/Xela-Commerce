@@ -1,1 +1,66 @@
-<p>transactions-page works!</p>
+<div class="grid">
+  <mat-card class="col-7">
+    <mat-card-header class="mx-auto my-4">
+      <mat-card-title class="text-3xl font-bold">
+        Brindanos Informacion
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="mb-3">
+      <form class="formgrid grid" [formGroup]="tranForm">
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="col-10 col-offset-1">
+            <mat-label>Codigo de Publicación</mat-label>
+            <input matInput type="number" min="10000000" max="99999999" placeholder="########" formControlName="code">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-10 col-offset-1">
+            <mat-label>Cantidad a Tranferir</mat-label>
+            <input matInput type="number" min="0" max="9999" formControlName="amount">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-10 col-offset-1">
+            <mat-label>Usuario que Recibira</mat-label>
+            <input matInput type="text" formControlName="receiving_user_id">
+          </mat-form-field>
+          <div class="col-10 col-offset-1">
+            <button mat-raised-button color="accent" class="w-full" [disabled]="!tranForm.valid" (click)="onTransfer()">
+              Transferir
+            </button>
+          </div>
+        </div>
+        <div class="col-6 col-offset-1">
+          @if (publication) {
+          <shared-publication-card [publication]="publication">
+            Publicación: {{ publication.code }}
+          </shared-publication-card>
+          } @else {
+          <span class="p-5 text-2xl font-bold">Sin existencia</span>
+          }
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="col-4 col-offset-1" style="height: 550px;">
+    <mat-card-content>
+      <mat-card class="shadow-6">
+        <mat-card-header>
+          <img mat-card-avatar src="../../../../assets/ceibas.png" alt="">
+          <mat-card-title>Total de Ceibas: {{ currencies?.ceibas }}</mat-card-title>
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="mt-3 p-2 shadow-6">
+        <mat-card-content class="overflow-auto" style="height: 360px;">
+          @for (transaction of transactions; track $index) {
+            <mat-card class="shadow-8 m-2">
+              <mat-card-content>
+                <p class="text-xl font-bold">Fecha: {{returnPD(transaction.created_at)}}</p>
+                <p class="text-xl"> Emisor: {{ transaction.issuing_user.full_name }}</p>
+                <p class="text-xl">Receptor: {{ transaction.receiving_user.full_name }}</p>
+                <p class="text-xl">Cantidad: {{ transaction.amount }}</p>
+                <p class="text-xl">Motivo: {{ transaction.category.name }}</p>
+              </mat-card-content>
+            </mat-card>
+          }
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

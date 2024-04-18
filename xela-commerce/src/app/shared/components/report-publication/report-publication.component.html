@@ -1,0 +1,17 @@
+<div class="p-3">
+  <h2 mat-dialog-title class="text-3xl font-bold">Reporte de Publicación</h2>
+  <mat-dialog-content >
+    <p class="text-xl">Cuentanos el motivo:</p>
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>¿Por que?</mat-label>
+        <textarea matInput formControlName="reason" cdkTextareaAutosize="false" maxlength="255" style="height: 70px;"></textarea>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mr-3">
+    <span class="spacer"></span>
+    <button mat-stroked-button color="warn" (click)="onCancel()">Cancelar</button>
+    <button mat-stroked-button color="accent" [disabled]="form.invalid" (click)="onReport()">Enviar</button>
+  </mat-dialog-actions>
+</div>

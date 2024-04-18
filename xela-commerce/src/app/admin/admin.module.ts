@@ -9,6 +9,7 @@ import { AddAdminPageComponent } from './pages/add-admin-page/add-admin-page.com
 import { ReviewPublicationsPageComponent } from './pages/review-publications-page/review-publications-page.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReasonsPageComponent } from './pages/reasons-page/reasons-page.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminLayoutComponent,
     ReportedPublicationsPageComponent,
     AddAdminPageComponent,
-    ReviewPublicationsPageComponent
+    ReviewPublicationsPageComponent,
+    ReasonsPageComponent
   ],
   imports: [
     CommonModule,

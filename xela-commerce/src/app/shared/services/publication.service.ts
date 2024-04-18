@@ -1,8 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 import { Publication, PublicationResponse, PublicationsResponse } from '../interfaces/publication.interface';
+import { BaseResponse } from '../interfaces/base-response.interface';
+import { DataReport, Reason, ReasonsResponse } from '../interfaces/report.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ import { Publication, PublicationResponse, PublicationsResponse } from '../inter
 export class PublicationService {
 
   private readonly baseUrl: string = `${environment.API_URL}/publication`;
+  private readonly reportUrl: string = `${environment.API_URL}/report`;
 
   private httpClient =  inject(HttpClient);
   private _publications: BehaviorSubject<Publication[]> = new BehaviorSubject<Publication[]>([]);
@@ -70,8 +73,31 @@ export class PublicationService {
     return this.processRequest(this.httpClient.delete<PublicationsResponse>(url, {headers}));
   }
 
-  public publications(): Observable<Publication[]|[]> {
+  public publications(): Observable<Publication[]> {
     return this._publications.asObservable();
+  }
+
+  reportPublication(data: DataReport, pub_id: number):Observable<boolean> {
+    const url: string = `${this.reportUrl}/create/${pub_id}`;
+    const headers = this.makeHeader();
+    return this.httpClient.post<PublicationsResponse>(url, data, { headers }).pipe(
+      tap((res: PublicationsResponse) => {
+        if (res.publications) {
+          this._publications.next(res.publications)
+        }
+      }),
+      map(() => true),
+      catchError((error: HttpErrorResponse) => throwError(() => error))
+    );
+  }
+
+  getReasons(pub_id: number) {
+    const url: string = `${this.reportUrl}/reasons/${pub_id}`;
+    const headers = this.makeHeader();
+    return this.httpClient.get<ReasonsResponse>(url, { headers }).pipe(
+      map(({reasons}) => reasons),
+      catchError((error: HttpErrorResponse) => throwError(() => error))
+    );
   }
 
 }

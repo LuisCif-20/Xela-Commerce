@@ -49,10 +49,10 @@ export class PublicationFormComponent implements OnInit, OnDestroy {
   ];
   public pubForm: FormGroup = this.formBuilder.group({
     image:        [null],
-    price:        [100, [Validators.required, Validators.min(1), Validators.max(9999)]],
-    title:        ['Labial B&T', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
-    description:  ['Labial reparador color natural.', [Validators.required, Validators.minLength(5), Validators.maxLength(255)]],
-    category_id:  [2, [Validators.required]],
+    price:        ['', [Validators.required, Validators.min(1), Validators.max(9999)]],
+    title:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+    description:  ['', [Validators.required, Validators.minLength(5), Validators.maxLength(255)]],
+    category_id:  ['', [Validators.required]],
   });
 
   ngOnInit(): void {

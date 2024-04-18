@@ -6,8 +6,8 @@
           <div class="grid max-h-full overflow-auto">
             @for (publication of classifyPubs(group); track $index) {
               <shared-publication-card class="md:col-4 sm:col-12" [publication]="publication">
-                <button mat-flat-button color="primary" class="mr-2 my-auto">Chatear</button>
-                <button mat-flat-button color="warn" class="my-auto">Reportar</button>
+                <button mat-flat-button color="primary" class="mr-2 my-auto" (click)="onChat(publication.id)">Chatear</button>
+                <button mat-flat-button color="warn" class="my-auto" (click)="reportPublication(publication.id)">Reportar</button>
               </shared-publication-card>
             }
           </div>

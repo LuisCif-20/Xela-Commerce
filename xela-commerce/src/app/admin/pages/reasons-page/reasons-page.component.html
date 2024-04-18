@@ -1,0 +1,46 @@
+<div class="grid p-7">
+  <div class="absolute hidden-button" style="top: 6rem; left: 2rem;">
+    <button mat-fab matTooltip="Regresar" routerLink="/admin/reported-publications">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+  </div>
+  <div class="col-4">
+    <shared-publication-card [publication]="publication!">
+      <span class="font-bold">Codigo de Publicacion: {{ publication?.code }}</span>
+    </shared-publication-card>
+  </div>
+  <div class="col-8">
+    <mat-card class="shadow-5 p-4" style="height: 450px;">
+      <div class="shadow-8 p-2" style="height: 325px;">
+        <div class="overflow-auto h-full">
+          @if (reasons.length !== 0) {
+            @for (reason of reasons; track $index) {
+              <mat-card class="m-2 shadow-8">
+                <mat-card-header>
+                  <img mat-card-avatar [src]="returnAvatar(reason.user.profile_picture)" alt="Avatar">
+                  <mat-card-title class="text-xl font-bold">
+                    {{ reason.user.user_name }}
+                  </mat-card-title>
+                  <mat-card-subtitle>
+                    {{ returnPD(reason.updated_at) }}
+                  </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>{{ reason.reason }}</p>
+                </mat-card-content>
+              </mat-card>
+            }
+          }
+        </div>
+      </div>
+      <div class="flex justify-content-center">
+        <button mat-mini-fab color="accent" class="mt-4 mr-2" matTooltip="Restaurar" (click)="restore(publication!.id)">
+          <mat-icon>settings_backup_restore</mat-icon>
+        </button>
+        <button mat-mini-fab color="warn" class="mt-4 ml-2" matTooltip="Eliminar" (click)="delete(publication!.id)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>

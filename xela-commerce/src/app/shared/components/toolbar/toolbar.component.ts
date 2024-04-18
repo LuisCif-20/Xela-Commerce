@@ -8,6 +8,12 @@ import { AuthStatus } from '../../../auth/interfaces/auth-status.enum';
 @Component({
   selector: 'shared-toolbar',
   templateUrl: './toolbar.component.html',
+  styles: `
+    .tool {
+      display: flex;
+      align-items: center;
+    }
+  `
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
 

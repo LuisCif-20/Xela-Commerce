@@ -14,6 +14,7 @@ import { checkRoleGuard } from '../auth/guards/check-role.guard';
 import { CurrenciesPageComponent } from './pages/currencies-page/currencies-page.component';
 import { EditPublicationPageComponent } from './pages/edit-publication-page/edit-publication-page.component';
 import { publicationByIdResolver } from './resolvers/publicationById.resolver';
+import { transactionsResolver } from './resolvers/transactions.resolver';
 
 
 const routes: Routes = [
@@ -68,6 +69,7 @@ const routes: Routes = [
         path: 'transactions',
         title: 'Transacciones',
         component: TransactionsPageComponent,
+        resolve: { transactions: transactionsResolver },
         data: { role: 'Comun' },
         canActivate: [authGuard, checkRoleGuard]
       },

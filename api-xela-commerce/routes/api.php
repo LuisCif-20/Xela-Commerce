@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\CurrencyController;
 use App\Http\Controllers\Api\PublicationController;
+use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +35,16 @@ Route::middleware('jwt.auth')->prefix('publication')
         Route::post('/update/{pub}', 'update');
         Route::patch('/set-state/{pub}', 'setState');
         Route::delete('/delete/{pub}', 'destroy');
+    });
+
+Route::middleware('jwt.auth')->prefix('report')
+    ->controller(ReportController::class)->group(function () {
+        Route::get('/reasons/{pub}', 'show');
+        Route::post('/create/{pub}', 'store');
+    });
+
+Route::middleware('jwt.auth')->prefix('transaction')
+    ->controller(TransactionController::class)->group(function () {
+        Route::get('/my-transactions/{user}', 'index');
+        Route::post('/make-transaction/{pub}', 'store');
     });

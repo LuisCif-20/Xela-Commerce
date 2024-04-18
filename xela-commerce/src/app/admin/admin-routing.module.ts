@@ -5,6 +5,9 @@ import { ReportedPublicationsPageComponent } from './pages/reported-publications
 import { AddAdminPageComponent } from './pages/add-admin-page/add-admin-page.component';
 import { ConfigAccountPageComponent } from '../shared/pages/config-account-page/config-account-page.component';
 import { ReviewPublicationsPageComponent } from './pages/review-publications-page/review-publications-page.component';
+import { ReasonsPageComponent } from './pages/reasons-page/reasons-page.component';
+import { publicationByIdResolver } from '../common-user/resolvers/publicationById.resolver';
+import { reasonsResolver } from './resolvers/reasons.resolver';
 
 const routes: Routes = [
   {
@@ -30,6 +33,12 @@ const routes: Routes = [
         path: 'config-account',
         title: 'Mi Cuenta',
         component: ConfigAccountPageComponent
+      },
+      {
+        path: 'reasons/:id',
+        title: 'Razones',
+        resolve: { publication: publicationByIdResolver, reasons: reasonsResolver },
+        component: ReasonsPageComponent
       },
       {
         path: '**',

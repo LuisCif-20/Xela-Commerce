@@ -1,5 +1,27 @@
 <shared-toolbar [color]="color" [options]="options">
-  <div class="pages m-6">
-    <router-outlet/>
+  <div class="search mx-auto" style="width: 300px;">
+    <div class="search-container">
+      <button mat-icon-button>
+        <mat-icon style="color: #303030;">search</mat-icon>
+      </button>
+      <input type="text" #text placeholder="Busca algo..." (input)="onInputChange()">
+    </div>
   </div>
+  @if (!search) {
+  <div class="pages m-6">
+    <router-outlet />
+  </div>
+  } @else {
+  <div class="shadow-6 m-6 overflow-auto p-3" style="height: 550px;">
+    <div class="grid">
+      @for (publication of publications; track $index) {
+      <shared-publication-card class="md:col-4 sm:col-12" [publication]="publication">
+        <button mat-flat-button color="primary" class="mr-2 my-auto" (click)="onChat(publication.id)">Chatear</button>
+        <button mat-flat-button color="warn" class="my-auto"
+          (click)="reportPublication(publication.id)">Reportar</button>
+      </shared-publication-card>
+      }
+    </div>
+  </div>
+  }
 </shared-toolbar>

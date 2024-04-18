@@ -34,3 +34,7 @@ export const showSuccess = (snackBar: MatSnackBar, message: string) => {
 export const showError = (snackBar: MatSnackBar, err: HttpErrorResponse) => {
     showSnackBar(snackBar, makeMsg(err), Colors.warn);
 }
+
+export const showErrorMsg = (snackBar: MatSnackBar, err: string) => {
+    showSnackBar(snackBar, err, Colors.warn);
+}

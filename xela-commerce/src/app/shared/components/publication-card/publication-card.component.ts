@@ -60,4 +60,14 @@ export class PublicationCardComponent implements OnInit {
     }
   }
 
+  returnToolTip(state: string) {
+    if (state === 'pending') {
+      return 'Pendiente';
+    } else if (state === 'approved') {
+      return 'Aprobada';
+    } else {
+      return 'Reportada';
+    }
+  }
+
 }

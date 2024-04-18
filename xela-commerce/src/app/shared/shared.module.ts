@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SetUserDataFormComponent } from './components/set-user-data-form/set-user-data-form.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { PublicationCardComponent } from './components/publication-card/publication-card.component';
+import { ReportPublicationComponent } from './components/report-publication/report-publication.component';
 
 
 
@@ -22,6 +23,7 @@ import { PublicationCardComponent } from './components/publication-card/publicat
     SetUserDataFormComponent,
     SnackBarComponent,
     PublicationCardComponent,
+    ReportPublicationComponent,
   ],
   imports: [
     CommonModule,
